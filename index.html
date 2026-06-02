@@ -1,0 +1,1378 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard Dupla Atuação — Análise Completa | Abril 2026</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#ffffff;color:#1f2328;line-height:1.6}
+.container{max-width:1400px;margin:0 auto;padding:20px}
+h1{font-size:28px;font-weight:700;color:#1f2328;margin-bottom:4px}
+.subtitle{color:#656d76;font-size:14px;margin-bottom:30px}
+h2{font-size:20px;font-weight:600;color:#0550ae;margin:32px 0 16px;padding-bottom:8px;border-bottom:1px solid #d1d9e0}
+h3{font-size:16px;font-weight:600;color:#1f2328;margin:20px 0 12px}
+.grid{display:grid;gap:16px}
+.grid-3{grid-template-columns:repeat(3,1fr)}
+.grid-2{grid-template-columns:repeat(2,1fr)}
+.grid-4{grid-template-columns:repeat(4,1fr)}
+.card{background:#ffffff;border:1px solid #d1d9e0;border-radius:12px;padding:20px;box-shadow:0 1px 3px rgba(31,35,40,0.04)}
+.card-accent{border-left:4px solid #0550ae}
+.card-warn{border-left:4px solid #bf8700}
+.card-danger{border-left:4px solid #cf222e}
+.card-success{border-left:4px solid #1a7f37}
+.metric{text-align:center}
+.metric .value{font-size:36px;font-weight:700;color:#1f2328}
+.metric .label{font-size:12px;color:#656d76;text-transform:uppercase;letter-spacing:0.5px;margin-top:4px}
+.metric .sub{font-size:13px;color:#656d76;margin-top:2px}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{background:#f6f8fa;color:#656d76;font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:0.5px;padding:10px 12px;text-align:left;border-bottom:2px solid #d1d9e0}
+td{padding:10px 12px;border-bottom:1px solid #eaeef2;color:#1f2328}
+tr:hover td{background:#f6f8fa}
+.highlight{color:#0550ae;font-weight:600}
+.danger{color:#cf222e;font-weight:600}
+.success{color:#1a7f37;font-weight:600}
+.warn{color:#bf8700;font-weight:600}
+.bar-container{display:flex;align-items:center;gap:8px}
+.bar{height:20px;border-radius:4px;min-width:2px;transition:width 0.3s}
+.bar-blue{background:linear-gradient(90deg,#0550ae,#368cf9)}
+.bar-orange{background:linear-gradient(90deg,#bf8700,#d4a72c)}
+.bar-red{background:linear-gradient(90deg,#cf222e,#e5534b)}
+.bar-green{background:linear-gradient(90deg,#1a7f37,#2da44e)}
+.bar-purple{background:linear-gradient(90deg,#6639ba,#8250df)}
+.bar-gray{background:#afb8c1}
+.insight-box{background:#f6f8fa;border:1px solid #d1d9e0;border-radius:8px;padding:16px;margin:12px 0;font-size:14px}
+.insight-box.critical{border-color:#cf222e;background:#ffebe9}
+.insight-box.positive{border-color:#1a7f37;background:#dafbe1}
+.insight-box.warning{border-color:#bf8700;background:#fff8c5}
+.insight-box strong{color:#1f2328}
+.tag{display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600}
+.tag-self{background:#ddf4ff;color:#0550ae}
+.tag-com{background:#dafbe1;color:#1a7f37}
+.tag-dupla{background:#fff8c5;color:#9a6700}
+.section-nav{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px;position:sticky;top:0;background:#ffffff;padding:12px 0;z-index:10;border-bottom:1px solid #eaeef2}
+.section-nav a{color:#656d76;text-decoration:none;padding:6px 14px;border-radius:20px;font-size:13px;border:1px solid #d1d9e0;transition:all 0.2s}
+.section-nav a:hover,.section-nav a.active{color:#0550ae;border-color:#0550ae;background:#ddf4ff}
+.summary-box{background:linear-gradient(135deg,#f6f8fa,#eaeef2);border:1px solid #d1d9e0;border-radius:12px;padding:24px;margin:16px 0}
+.summary-box h3{color:#0550ae;margin-top:0}
+.summary-box p{margin:8px 0;font-size:14px}
+.pct-bar{display:flex;height:28px;border-radius:6px;overflow:hidden;margin:8px 0}
+.pct-bar div{display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:#fff;min-width:30px}
+.toc{columns:2;font-size:14px;margin:12px 0}
+.toc li{margin:4px 0;color:#656d76}
+.toc li a{color:#0550ae;text-decoration:none}
+.comparison-row{display:flex;align-items:center;gap:12px;margin:8px 0;font-size:14px}
+.comparison-row .label-col{width:180px;color:#656d76}
+.comparison-row .bar-col{flex:1;display:flex;gap:4px;align-items:center}
+.comparison-row .val{font-weight:600;min-width:50px;text-align:right}
+@media(max-width:900px){.grid-3,.grid-4{grid-template-columns:1fr}.grid-2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>Dashboard Dupla Atuação — Análise Completa</h1>
+<p class="subtitle">Base: Abril 2026 | 2.544 projetos | PROCV cruzando 4 bases (Ativação, Vende AI, Churn Levantada de Mão, Motivos de Churn Ativação) | Análise de contato por origem de venda</p>
+
+<div class="summary-box" style="border:2px solid #cf222e;margin-bottom:24px">
+<h3 style="font-size:18px;color:#cf222e">Por que Dupla Atuação tem pior performance?</h3>
+<p style="margin-top:8px"><strong>Dupla Atuação = parceiro que comprou sozinho (self), ficou represado ~5 dias sem ativar, e foi transbordado para o time comercial.</strong> Representa 32,5% da base (828 de 2.544 projetos) e tem as piores métricas em todas as dimensões. Em uma frase: <strong>o represamento transforma um lead motivado em um lead frio, e o fluxo pós-transbordo não é desenhado para re-aquecer esse parceiro.</strong></p>
+
+<div style="margin:16px 0 0 0">
+<p><strong style="color:#cf222e">1. O represamento "esfria" o parceiro.</strong> Ele comprou motivado, escolheu seguir sozinho, mas nos 5 dias de represamento não conseguiu ativar. Quando é transbordado para o HC, já perdeu o entusiasmo inicial. É como comprar uma academia e começar a treinar só 1 semana depois — a chance de desistir sobe muito.</p>
+
+<p style="margin-top:10px"><strong style="color:#cf222e">2. O gargalo não é setup, é pedidos.</strong> 64,4% dos não-ativados já completaram o setup mínimo. Estão travados nos 5 pedidos. O represamento consumiu exatamente a janela em que o restaurante teria mais disposição para fazer os primeiros pedidos com apoio.</p>
+
+<p style="margin-top:10px"><strong style="color:#cf222e">3. O HC recebe o parceiro sem contexto.</strong> No fluxo 100% comercial, o HC sabe de onde o parceiro veio, o que foi prometido, qual a tag. Na dupla atuação, o HC recebe alguém que já tentou e falhou — mas não sabe o que tentou, onde travou, nem qual era a motivação. O onboarding recomeça do zero.</p>
+
+<p style="margin-top:10px"><strong style="color:#cf222e">4. O parceiro não pediu ajuda — a ajuda veio porque ele "fracassou".</strong> Isso gera resistência. Nas conversas, parceiros de origem Self engajam menos (44,5% com menos de 5 mensagens), mencionam cancelamento 2x mais, e o HC investe menos esforço neles (54% sem nenhum áudio enviado).</p>
+
+<p style="margin-top:10px"><strong style="color:#cf222e">5. A qualidade do lead vira irrelevante.</strong> P0 ativa menos que P3 na dupla atuação (36,5% vs 43,6%). O represamento neutraliza a vantagem de ser um bom lead.</p>
+
+<p style="margin-top:10px"><strong style="color:#cf222e">6. O churn é silencioso e por falta de contato.</strong> 96% dos churns não aparecem na levantada de mão. Dos motivos mapeados pelo time, dupla atuação tem 3x mais churn por "Contato" (14,8% vs 5,2%) — o parceiro simplesmente para de responder. Os que formalizaram disseram: "não me adaptei" e "não tive acompanhamento".</p>
+</div>
+
+<div style="margin-top:16px;padding-top:12px;border-top:1px solid #d1d9e0">
+<p><strong>Números-chave:</strong></p>
+<p style="margin:6px 0 0 16px">
+→ Ativação <strong>40,2%</strong> vs 54,1% comercial (gap -13,9pp) | 5pdd Delivery <strong>14,0%</strong> vs 22,0% (gap -8,0pp) | Retenção M1 <strong>34,8%</strong> vs 37,2%<br>
+→ 169 parceiros em <strong>Reciclagem</strong> (pausados por não responder) — 98% de origem Self<br>
+→ <strong>Zero conversas</strong> de dupla atuação no Vende AI — gap total de visibilidade
+</p>
+</div>
+</div>
+
+<nav class="section-nav">
+<a href="#visao">Visão Geral</a>
+<a href="#metricas">Métricas</a>
+<a href="#perfil">Perfil do Parceiro</a>
+<a href="#setup">Setup & Jornada</a>
+<a href="#pdd-setup">5pdd vs Setup</a>
+<a href="#tempo">Tempo & Desengajamento</a>
+<a href="#reciclagem">Reciclagem</a>
+<a href="#contato">Contato por Origem</a>
+<a href="#conversas">Conversas</a>
+<a href="#churn">Churn</a>
+<a href="#porque">Por Quê?</a>
+<a href="#acoes">Ações</a>
+</nav>
+
+<!-- ==================== VISÃO GERAL ==================== -->
+<section id="visao">
+<h2>1. Visão Geral — Distribuição dos Projetos</h2>
+
+<div class="grid grid-3">
+<div class="card card-accent metric">
+  <div class="value" style="color:#0550ae">223</div>
+  <div class="label">100% Self</div>
+  <div class="sub">8,8% do total</div>
+</div>
+<div class="card card-success metric">
+  <div class="value" style="color:#1a7f37">1.493</div>
+  <div class="label">100% Comercial</div>
+  <div class="sub">58,7% do total</div>
+</div>
+<div class="card card-warn metric">
+  <div class="value" style="color:#9a6700">828</div>
+  <div class="label">Dupla Atuação</div>
+  <div class="sub">32,5% do total</div>
+</div>
+</div>
+
+<div class="card" style="margin-top:16px">
+<h3>Distribuição Visual</h3>
+<div class="pct-bar">
+  <div style="width:8.8%;background:#0550ae" title="100% Self: 8.8%">8,8%</div>
+  <div style="width:58.7%;background:#1a7f37" title="100% Comercial: 58.7%">58,7%</div>
+  <div style="width:32.5%;background:#bf8700" title="Dupla Atuação: 32.5%">32,5%</div>
+</div>
+<div style="display:flex;gap:20px;font-size:12px;color:#656d76;margin-top:4px">
+  <span><span style="color:#0550ae">■</span> Self</span>
+  <span><span style="color:#1a7f37">■</span> Comercial</span>
+  <span><span style="color:#bf8700">■</span> Dupla Atuação</span>
+</div>
+</div>
+
+<div class="insight-box warning">
+<strong>1 em cada 3 projetos é Dupla Atuação</strong> — parceiro que comprou self, foi represado ~5 dias, não ativou, e depois foi transbordado para o time comercial. Esse grupo tem as piores métricas em todas as dimensões.
+</div>
+
+<div class="card" style="margin-top:16px">
+<h3>Composição por Origem de Venda (sale_responsible_team)</h3>
+<p style="font-size:12px;color:#656d76;margin-bottom:8px">Critério: null reclassificado como Self (parceiros sem executivo atribuído compraram sozinhos).</p>
+<table>
+<tr><th>Origem de Venda</th><th>Projetos</th><th>% Total</th><th>Descrição</th></tr>
+<tr><td><span class="tag tag-self">Self (Coord. Self + null)</span></td><td>1.858</td><td>73,0%</td><td>Compraram via landing page self-service ou sem executivo atribuído</td></tr>
+<tr><td><span class="tag tag-com">Comercial (Executivos)</span></td><td>686</td><td>27,0%</td><td>Vendidos por executivos (Andreia, Andresa, Paula, Dariane, Jessica)</td></tr>
+</table>
+</div>
+
+<div class="card" style="margin-top:16px">
+<h3>Cruzamento: Tipo Ativação × Origem de Venda <span style="font-size:11px;color:#656d76;font-weight:400">(null = Self)</span></h3>
+<table>
+<tr><th>Tipo Ativação</th><th>Self (Coord. Self + null)</th><th>Comercial (Executivos)</th></tr>
+<tr><td><span class="tag tag-self">100% Self</span></td><td>210 (94,2%)</td><td>13 (5,8%)</td></tr>
+<tr><td><span class="tag tag-com">100% Comercial</span></td><td>883 (59,1%)</td><td>610 (40,9%)</td></tr>
+<tr><td><span class="tag tag-dupla">Dupla Atuação</span></td><td class="warn">765 (92,4%)</td><td>63 (7,6%)</td></tr>
+</table>
+<div class="insight-box">
+<strong>92,4% dos Dupla Atuação são de origem Self</strong> (incluindo null) — confirma que são parceiros que compraram sozinhos, falharam no represamento e foram transbordados. No "100% Comercial", 59,1% também são Self — parceiros self que foram direto para o time comercial sem represamento.
+</div>
+</div>
+</section>
+
+<!-- ==================== MÉTRICAS ==================== -->
+<section id="metricas">
+<h2>2. Comparativo de Métricas — Baseline</h2>
+
+<div class="card">
+<table>
+<tr>
+<th>Métrica</th>
+<th><span class="tag tag-self">100% Self</span></th>
+<th><span class="tag tag-com">100% Comercial</span></th>
+<th><span class="tag tag-dupla">Dupla Atuação</span></th>
+<th>Gap Dupla vs Comercial</th>
+</tr>
+<tr>
+<td>Projetos (n)</td>
+<td>223</td>
+<td>1.493</td>
+<td>828</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Ativados (1pdd M0)</td>
+<td class="success">220 (98,7%)</td>
+<td class="highlight">807 (54,1%)</td>
+<td class="warn">333 (40,2%)</td>
+<td class="danger">-13,9pp</td>
+</tr>
+<tr>
+<td>5pdd Delivery M0</td>
+<td class="success">160 (71,7%)</td>
+<td class="highlight">329 (22,0%)</td>
+<td class="warn">116 (14,0%)</td>
+<td class="danger">-8,0pp</td>
+</tr>
+<tr>
+<td>5pdd Salão M0</td>
+<td class="success">80 (35,9%)</td>
+<td class="highlight">111 (7,4%)</td>
+<td class="warn">25 (3,0%)</td>
+<td class="danger">-4,4pp</td>
+</tr>
+<tr>
+<td>Retenção M1</td>
+<td class="success">162 (72,6%)</td>
+<td class="highlight">556 (37,2%)</td>
+<td class="warn">288 (34,8%)</td>
+<td class="danger">-2,4pp</td>
+</tr>
+<tr>
+<td>Churn (step_name)</td>
+<td>5 (2,2%)</td>
+<td>49 (3,3%)</td>
+<td class="warn">29 (3,5%)</td>
+<td style="color:#656d76">+0,2pp</td>
+</tr>
+</table>
+</div>
+
+<div class="insight-box critical">
+<strong>Dupla Atuação é consistentemente o PIOR grupo.</strong> Ativa 40% vs 54% do comercial (gap de -14pp). Em 5pdd delivery a diferença é -8pp. E isso com 32,5% da base — não é um nicho, é 1 em cada 3 projetos.
+</div>
+
+<div class="card" style="margin-top:16px">
+<h3>Dupla Atuação por Tag Multiproduto</h3>
+<table>
+<tr><th>Tag</th><th>Projetos</th><th>Ativados</th><th>% Ativação</th><th>5pdd Del</th><th>5pdd Sal</th></tr>
+<tr><td>Delivery</td><td>431</td><td>124</td><td class="warn">28,7%</td><td>64 (14,8%)</td><td>—</td></tr>
+<tr><td>Híbrido</td><td>275</td><td>135</td><td>49,1%</td><td>44 (16,0%)</td><td>18 (6,5%)</td></tr>
+<tr><td>Salão</td><td>122</td><td>17</td><td class="danger">13,9%</td><td>—</td><td>7 (5,7%)</td></tr>
+</table>
+<div class="insight-box">
+<strong>Salão é crítico:</strong> apenas 13,9% de ativação na dupla atuação — o setup de salão é mais complexo (mesa, garçom, tipo atendimento) e sem o HC desde o início, o parceiro trava.
+</div>
+</div>
+
+<div class="card" style="margin-top:16px">
+<h3>Dupla Atuação por Score de Lead (P)</h3>
+<table>
+<tr><th>P-Score</th><th>Projetos</th><th>Ativados</th><th>% Ativação</th></tr>
+<tr><td>P0 (melhor lead)</td><td>85</td><td>31</td><td>36,5%</td></tr>
+<tr><td>P1</td><td>106</td><td>45</td><td>42,5%</td></tr>
+<tr><td>P2</td><td>246</td><td>98</td><td>39,8%</td></tr>
+<tr><td>P3 (pior lead)</td><td>391</td><td>159</td><td class="success">43,6%</td></tr>
+</table>
+<div class="insight-box warning">
+<strong>O score de lead NÃO prediz ativação na dupla atuação.</strong> P0 (melhor lead) ativa MENOS que P3 (36,5% vs 43,6%). Isso sugere que o gargalo não é a qualidade do lead, mas sim o processo pós-represamento.
+</div>
+</div>
+</section>
+
+<!-- ==================== PERFIL DO PARCEIRO ==================== -->
+<section id="perfil">
+<h2>3. Perfil do Parceiro — Comparativo Self vs Comercial vs Dupla</h2>
+
+<div class="card">
+<h3>Meio de Pagamento</h3>
+<p style="font-size:12px;color:#656d76;margin-bottom:8px">Dados da base completa (2.544 projetos), coluna <code>payment_method</code>. Todos os tipos de ativação estão na mesma base.</p>
+<table>
+<tr><th>Meio de Pagamento</th><th><span class="tag tag-self">100% Self (223)</span></th><th><span class="tag tag-com">100% Comercial (1.493)</span></th><th><span class="tag tag-dupla">Dupla Atuação (828)</span></th></tr>
+<tr><td>Pix</td><td>173 (77,6%)</td><td>1.190 (79,7%)</td><td class="warn">577 (69,7%)</td></tr>
+<tr><td>Cartão de Crédito</td><td>48 (21,5%)</td><td>265 (17,7%)</td><td class="warn">236 (28,5%)</td></tr>
+<tr><td>Boleto</td><td>2 (0,9%)</td><td>13 (0,9%)</td><td>11 (1,3%)</td></tr>
+</table>
+<div class="insight-box">
+<strong>Dupla atuação tem mais cartão de crédito (28,5%) e menos Pix (69,7%).</strong> No Self e Comercial, Pix fica em ~78-80%. Isso pode indicar um perfil de parceiro com menos familiaridade digital (prefere cartão), o que é coerente com a dificuldade de ativar sozinho.
+</div>
+</div>
+
+<div class="card" style="margin-top:16px">
+<h3>Ativação por Meio de Pagamento</h3>
+<table>
+<tr><th>Pagamento</th><th>Self — Ativação</th><th>Comercial — Ativação</th><th>Dupla — Ativação</th></tr>
+<tr><td>Pix</td><td class="success">98,8%</td><td class="highlight">54,5%</td><td class="warn">40,7%</td></tr>
+<tr><td>Cartão de Crédito</td><td class="success">97,9%</td><td class="highlight">55,8%</td><td class="warn">39,4%</td></tr>
+<tr><td>Boleto</td><td>100%</td><td class="danger">15,4%</td><td class="warn">27,3%</td></tr>
+</table>
+<div class="insight-box">
+No dupla atuação, <strong>Pix e cartão ativam praticamente igual (~40%)</strong> — o meio de pagamento não é o diferenciador. Já no comercial, boleto ativa muito menos (15,4%). O problema do dupla atuação é transversal: independe do meio de pagamento.
+</div>
+</div>
+
+<div class="card" style="margin-top:16px">
+<h3>Faturamento (Invoicing)</h3>
+<table>
+<tr><th>Faixa</th><th><span class="tag tag-self">Self</span></th><th><span class="tag tag-com">Comercial</span></th><th><span class="tag tag-dupla">Dupla</span></th></tr>
+<tr><td>Até R$10.000</td><td>58 (26,0%)</td><td>289 (19,4%)</td><td>163 (19,7%)</td></tr>
+<tr><td>R$10k-R$20k</td><td>38 (17,0%)</td><td>174 (11,7%)</td><td>116 (14,0%)</td></tr>
+<tr><td>R$20k-R$40k</td><td>25 (11,2%)</td><td>122 (8,2%)</td><td>71 (8,6%)</td></tr>
+<tr><td>Acima de R$40k</td><td>15 (6,7%)</td><td>161 (10,8%)</td><td>66 (8,0%)</td></tr>
+<tr><td>Não inaugurou ainda</td><td>47 (21,1%)</td><td>312 (20,9%)</td><td class="warn">212 (25,6%)</td></tr>
+</table>
+<div class="insight-box">
+<strong>Dupla atuação tem a maior proporção de "Não inaugurou ainda" (25,6%)</strong> — 1 em cada 4 parceiros ainda nem abriu o restaurante. Esses parceiros precisam de um onboarding diferente: não é só configurar o sistema, é preparar para operar.
+</div>
+</div>
+
+<div class="card" style="margin-top:16px">
+<h3>Tem Computador? + Volume de Pedidos Esperado</h3>
+<table>
+<tr><th>Indicador</th><th><span class="tag tag-self">Self</span></th><th><span class="tag tag-com">Comercial</span></th><th><span class="tag tag-dupla">Dupla</span></th></tr>
+<tr>
+<td>Tem computador (Sim)</td>
+<td class="success">83,4%</td>
+<td>70,1%</td>
+<td>76,6%</td>
+</tr>
+<tr>
+<td>Ativação — com computador</td>
+<td class="success">99,5%</td>
+<td class="highlight">55,0%</td>
+<td class="warn">42,4%</td>
+</tr>
+<tr>
+<td>Ativação — sem computador</td>
+<td class="success">100%</td>
+<td class="warn">42,4%</td>
+<td class="danger">32,6%</td>
+</tr>
+<tr>
+<td>+10 pedidos/dia esperados</td>
+<td class="success">73,1%</td>
+<td>57,2%</td>
+<td>62,0%</td>
+</tr>
+<tr>
+<td>Ativação — +10 pedidos</td>
+<td class="success">99,4%</td>
+<td class="highlight">55,5%</td>
+<td class="warn">42,9%</td>
+</tr>
+<tr>
+<td>Ativação — -10 pedidos</td>
+<td class="success">100%</td>
+<td class="warn">47,5%</td>
+<td class="danger">36,4%</td>
+</tr>
+</table>
+<div class="insight-box">
+<strong>Parceiros sem computador ativam 10pp menos</strong> em todos os tipos. Na dupla atuação, quem não tem computador ativa apenas 32,6%. E quem espera menos de 10 pedidos/dia ativa apenas 36,4% — perfil de menor engajamento digital agravado pelo esfriamento.
+</div>
+</div>
+
+<div class="card" style="margin-top:16px">
+<h3>Ativação por Faturamento — Dupla Atuação</h3>
+<table>
+<tr><th>Faixa de Faturamento</th><th>Projetos</th><th>Ativados</th><th>% Ativação</th></tr>
+<tr><td>Até R$10.000</td><td>163</td><td>64</td><td>39,3%</td></tr>
+<tr><td>R$10k-R$20k</td><td>116</td><td>46</td><td>39,7%</td></tr>
+<tr><td>R$20k-R$40k</td><td>71</td><td>26</td><td>36,6%</td></tr>
+<tr><td class="highlight">Acima de R$40k</td><td>66</td><td>30</td><td class="highlight">45,5%</td></tr>
+<tr><td>Não inaugurou ainda</td><td>212</td><td>89</td><td>42,0%</td></tr>
+</table>
+<div class="insight-box">
+O faturamento tem pouco impacto na ativação dupla atuação — varia entre 36% e 45%. Apenas quem fatura acima de R$40k se destaca levemente (45,5%). O problema é sistêmico, não de porte do parceiro.
+</div>
+</div>
+</section>
+
+<!-- ==================== SETUP & JORNADA ==================== -->
+<section id="setup">
+<h2>4. Setup & Jornada — Onde Travam?</h2>
+
+<div class="card">
+<h3>Conclusão de Setups — Dupla Atuação (828 projetos)</h3>
+<table>
+<tr><th>Setup</th><th>Concluídos</th><th>%</th><th>Visual</th></tr>
+<tr><td>Login</td><td>815</td><td>98,4%</td><td><div class="bar bar-green" style="width:98%"></div></td></tr>
+<tr><td>Pagamento Online</td><td>664</td><td>80,2%</td><td><div class="bar bar-blue" style="width:80%"></div></td></tr>
+<tr><td>Pagamento Offline</td><td>660</td><td>79,7%</td><td><div class="bar bar-blue" style="width:80%"></div></td></tr>
+<tr><td>Horário Funcionamento</td><td>590</td><td>71,3%</td><td><div class="bar bar-blue" style="width:71%"></div></td></tr>
+<tr><td>Cardápio 10+ itens</td><td>542</td><td>65,5%</td><td><div class="bar bar-orange" style="width:66%"></div></td></tr>
+<tr><td>Área de Entrega</td><td>433</td><td>52,3%</td><td><div class="bar bar-orange" style="width:52%"></div></td></tr>
+<tr><td>Robô Ativo</td><td>388</td><td>46,9%</td><td><div class="bar bar-orange" style="width:47%"></div></td></tr>
+<tr><td>Tempo de Entrega</td><td>339</td><td>40,9%</td><td><div class="bar bar-red" style="width:41%"></div></td></tr>
+<tr><td>Valor Mín. Pedido</td><td>271</td><td>32,7%</td><td><div class="bar bar-red" style="width:33%"></div></td></tr>
+<tr><td>Tipo Atendimento</td><td>204</td><td>24,6%</td><td><div class="bar bar-red" style="width:25%"></div></td></tr>
+<tr><td>Tipo Operação</td><td>192</td><td>23,2%</td><td><div class="bar bar-red" style="width:23%"></div></td></tr>
+<tr><td>Setup Grupo Salão</td><td>102</td><td>12,3%</td><td><div class="bar bar-red" style="width:12%"></div></td></tr>
+</table>
+</div>
+
+<div class="card" style="margin-top:16px">
+<h3>Etapa dos Não-Ativados (495 parceiros dupla atuação)</h3>
+<table>
+<tr><th>Etapa (step_name)</th><th>Qtd</th><th>%</th></tr>
+<tr><td>Reciclagem</td><td class="warn">168</td><td>33,9%</td></tr>
+<tr><td>Setup Performance</td><td>119</td><td>24,0%</td></tr>
+<tr><td>Churn</td><td class="danger">83</td><td>16,8%</td></tr>
+<tr><td>Setup Mínimo</td><td>65</td><td>13,1%</td></tr>
+<tr><td>Ativação</td><td>40</td><td>8,1%</td></tr>
+<tr><td>Outros</td><td>20</td><td>4,0%</td></tr>
+</table>
+<div class="insight-box">
+<strong>64,4% dos não-ativados já têm setup mínimo completo</strong> (estão em Setup Performance, Reciclagem ou Ativação). O gargalo principal é PEDIDOS, não setup. Porém, 13,1% nem completaram o setup mínimo — esses travaram cedo.
+</div>
+</div>
+
+<div class="card" style="margin-top:16px">
+<h3>Atividades (contatos) — Esforço do HC</h3>
+<table>
+<tr><th>Grupo</th><th>Média Atividades</th><th>Interpretação</th></tr>
+<tr><td><span class="tag tag-dupla">Dupla — Ativou</span></td><td>5,3</td><td>Resolveu com poucos contatos</td></tr>
+<tr><td><span class="tag tag-dupla">Dupla — Não Ativou</span></td><td>6,6</td><td>Mais contatos, mas sem resultado</td></tr>
+<tr><td><span class="tag tag-com">Comercial — Geral</span></td><td>6,9</td><td>Baseline de esforço comercial</td></tr>
+</table>
+<div class="insight-box">
+Quem ativa na dupla atuação resolve rápido (5,3 atividades). Quem não ativa recebe mais contatos (6,6) mas não converte — pode indicar que o problema já existia antes do transbordo e o esforço extra do HC não é suficiente.
+</div>
+</div>
+</section>
+
+<!-- ==================== 5PDD ANTES DO SETUP ==================== -->
+<section id="pdd-setup">
+<h2>5. Ordem Setup vs Pedidos — Quem Faz 5pdd Antes de Completar Setup?</h2>
+
+<div class="insight-box">
+<strong>Pergunta:</strong> Os parceiros fazem os 5 pedidos antes de completar o setup mínimo ou o setup performance? Isso mostra se o setup é pré-requisito real ou se o parceiro "pula etapas". Grupos: <span class="tag tag-self">100% Self</span> <span class="tag tag-com">100% Comercial</span> <span class="tag tag-dupla">Dupla Atuação</span>, quebrados por origem de venda.
+</div>
+
+<!-- TABELA 1: ORIGEM SELF -->
+<div class="card" style="margin-top:16px">
+<h3>Origem de Venda: SELF</h3>
+<p style="font-size:13px;color:#656d76;margin-bottom:8px">Parceiros cuja venda veio de Coord. Self ou sale_responsible_team null</p>
+<table>
+<tr>
+<th>Grupo</th>
+<th>Projetos</th>
+<th>Com 5pdd</th>
+<th>5pdd ANTES setup mín</th>
+<th>%</th>
+<th>5pdd ANTES setup perf</th>
+<th>%</th>
+</tr>
+<tr>
+<td><span class="tag tag-self">100% Self</span></td>
+<td>210</td>
+<td>94</td>
+<td>3 / 92</td>
+<td>3,0%</td>
+<td>1 / 50</td>
+<td>2,0%</td>
+</tr>
+<tr>
+<td><span class="tag tag-com">100% Comercial</span></td>
+<td>883</td>
+<td>487</td>
+<td>15 / 461</td>
+<td>3,3%</td>
+<td>16 / 296</td>
+<td>5,4%</td>
+</tr>
+<tr style="background:#fff8c5">
+<td><span class="tag tag-dupla">Dupla Atuação</span></td>
+<td>765</td>
+<td>323</td>
+<td class="warn">20 / 306</td>
+<td class="warn">6,5%</td>
+<td>3 / 145</td>
+<td>2,1%</td>
+</tr>
+</table>
+<div class="insight-box" style="margin-top:12px">
+<strong>Dupla Atuação tem 2x mais inversão no setup mín (6,5% vs 3,0-3,3%).</strong> Entre parceiros de origem Self, quem teve dupla atuação é o que mais faz pedidos antes de completar o setup — provavelmente por ansiedade ou por não entender a sequência correta após o represamento. 100% Self e 100% Comercial ficam na faixa de 3%.
+</div>
+</div>
+
+<!-- TABELA 2: ORIGEM COMERCIAL -->
+<div class="card" style="margin-top:16px">
+<h3>Origem de Venda: COMERCIAL</h3>
+<p style="font-size:13px;color:#656d76;margin-bottom:8px">Parceiros cuja venda veio de executivo comercial nomeado</p>
+<table>
+<tr>
+<th>Grupo</th>
+<th>Projetos</th>
+<th>Com 5pdd</th>
+<th>5pdd ANTES setup mín</th>
+<th>%</th>
+<th>5pdd ANTES setup perf</th>
+<th>%</th>
+</tr>
+<tr>
+<td><span class="tag tag-self">100% Self</span></td>
+<td>13</td>
+<td>7</td>
+<td>0 / 7</td>
+<td>0,0%</td>
+<td>0 / 2</td>
+<td>0,0%</td>
+</tr>
+<tr>
+<td><span class="tag tag-com">100% Comercial</span></td>
+<td>610</td>
+<td>336</td>
+<td>8 / 328</td>
+<td>2,4%</td>
+<td>6 / 184</td>
+<td>3,3%</td>
+</tr>
+<tr style="background:#fff8c5">
+<td><span class="tag tag-dupla">Dupla Atuação</span></td>
+<td>63</td>
+<td>34</td>
+<td>1 / 33</td>
+<td>3,0%</td>
+<td class="warn">2 / 10</td>
+<td class="warn">20,0%</td>
+</tr>
+</table>
+<div class="insight-box" style="margin-top:12px">
+<strong>Dupla Atuação comercial: 20% fazem 5pdd antes do setup performance</strong> (n=10, amostra pequena). Esses 63 projetos de dupla atuação com origem comercial são casos raros — o parceiro foi vendido por executivo, caiu no self, falhou, e voltou para o HC. A amostra é pequena mas a inversão no setup performance chama atenção.
+</div>
+</div>
+
+<!-- DETALHAMENTO POR TAG — ORIGEM SELF -->
+<div class="card" style="margin-top:16px">
+<h3>Detalhamento por Tag — Origem Self</h3>
+<table>
+<tr><th>Tag</th><th colspan="3">100% Self</th><th colspan="3">100% Comercial</th><th colspan="3">Dupla Atuação</th></tr>
+<tr><th></th><th>Com 5pdd</th><th>Antes Min</th><th>Antes Perf</th><th>Com 5pdd</th><th>Antes Min</th><th>Antes Perf</th><th>Com 5pdd</th><th>Antes Min</th><th>Antes Perf</th></tr>
+<tr>
+<td>Delivery</td>
+<td>27</td>
+<td>2 (8,0%)</td>
+<td>1 (3,8%)</td>
+<td>159</td>
+<td>8 (5,5%)</td>
+<td>11 (7,6%)</td>
+<td>83</td>
+<td class="warn">7 (9,2%)</td>
+<td>4 (5,1%)</td>
+</tr>
+<tr>
+<td>Híbrido</td>
+<td>63</td>
+<td>1 (1,6%)</td>
+<td>0 (0%)</td>
+<td>310</td>
+<td>7 (2,3%)</td>
+<td>5 (4,7%)</td>
+<td>234</td>
+<td>12 (5,3%)</td>
+<td>1 (1,5%)</td>
+</tr>
+<tr>
+<td>Salão</td>
+<td>4</td>
+<td>0 (0%)</td>
+<td>0 (0%)</td>
+<td>18</td>
+<td>0 (0%)</td>
+<td>0 (0%)</td>
+<td>6</td>
+<td>1 (20,0%)</td>
+<td>0 (0%)</td>
+</tr>
+</table>
+</div>
+
+<!-- DETALHAMENTO POR TAG — ORIGEM COMERCIAL -->
+<div class="card" style="margin-top:16px">
+<h3>Detalhamento por Tag — Origem Comercial</h3>
+<table>
+<tr><th>Tag</th><th colspan="3">100% Self</th><th colspan="3">100% Comercial</th><th colspan="3">Dupla Atuação</th></tr>
+<tr><th></th><th>Com 5pdd</th><th>Antes Min</th><th>Antes Perf</th><th>Com 5pdd</th><th>Antes Min</th><th>Antes Perf</th><th>Com 5pdd</th><th>Antes Min</th><th>Antes Perf</th></tr>
+<tr>
+<td>Delivery</td>
+<td>1</td>
+<td>0 (0%)</td>
+<td>0 (0%)</td>
+<td>142</td>
+<td>4 (3,0%)</td>
+<td>3 (2,3%)</td>
+<td>6</td>
+<td>0 (0%)</td>
+<td>0 (0%)</td>
+</tr>
+<tr>
+<td>Híbrido</td>
+<td>6</td>
+<td>0 (0%)</td>
+<td>0 (0%)</td>
+<td>188</td>
+<td>4 (2,2%)</td>
+<td>3 (4,1%)</td>
+<td>26</td>
+<td>1 (4,0%)</td>
+<td class="warn">2 (28,6%)</td>
+</tr>
+<tr>
+<td>Salão</td>
+<td>0</td>
+<td>—</td>
+<td>—</td>
+<td>6</td>
+<td>0 (0%)</td>
+<td>0 (0%)</td>
+<td>2</td>
+<td>0 (0%)</td>
+<td>0 (0%)</td>
+</tr>
+</table>
+</div>
+
+<div class="summary-box" style="margin-top:16px">
+<h3>O que isso significa?</h3>
+<p>O setup mínimo é um pré-requisito real — <strong>mais de 93% fazem antes dos pedidos</strong> em todos os grupos. O parceiro dupla atuação não "pula" o setup de forma significativa.</p>
+<p style="margin-top:8px">Porém, o <strong>dupla atuação de origem Self tem a maior taxa de inversão</strong> (6,5% no setup mín), indicando que alguns desses parceiros estão fazendo pedidos de teste por conta própria antes de terminar de configurar — o que pode gerar experiências ruins (pedido sem área de entrega definida, sem robô ativo, etc.).</p>
+<p style="margin-top:8px">Na <strong>origem comercial</strong>, o dupla atuação tem amostra pequena (63 projetos), mas chama atenção o 20% de inversão no setup performance — especificamente no híbrido (28,6%), sugerindo que esses parceiros fazem pedidos delivery antes de completar o setup de salão.</p>
+<p style="margin-top:8px"><strong>Implicação:</strong> O fluxo de represamento deveria detectar parceiros que já estão fazendo pedidos antes de completar setup e priorizá-los para transbordo imediato — eles estão tentando, mas podem travar por falta de configuração.</p>
+</div>
+</section>
+
+<!-- ==================== TEMPO DE DESENGAJAMENTO ==================== -->
+<section id="tempo">
+<h2>6. Tempo de Desengajamento — Quando Param de Configurar?</h2>
+
+<div class="insight-box critical">
+<strong>Descoberta-chave: 55% dos não-ativados fazem seu último setup no D0 (mesmo dia da compra) e depois param.</strong> Eles configuram o que conseguem no impulso inicial e nunca mais voltam. Quando o transbordo acontece no D5, já são 5 dias sem atividade.
+</div>
+
+<div class="grid grid-3" style="margin-top:16px">
+<div class="card metric">
+<div class="value" style="color:#cf222e">D0</div>
+<div class="label">Mediana do último setup</div>
+<div class="sub">Não ativados — param no mesmo dia</div>
+</div>
+<div class="card metric">
+<div class="value" style="color:#9a6700">70,9%</div>
+<div class="label">Param até D2</div>
+<div class="sub">3 dias antes do transbordo</div>
+</div>
+<div class="card metric">
+<div class="value" style="color:#0550ae">D5</div>
+<div class="label">Transbordo fixo</div>
+<div class="sub">Todos transbordados no 5º dia</div>
+</div>
+</div>
+
+<div class="card" style="margin-top:16px">
+<h3>Dia do Último Setup — Não Ativados (484 com pelo menos 1 setup)</h3>
+<p style="font-size:13px;color:#656d76;margin-bottom:8px">Em qual dia após a venda o parceiro fez sua última configuração? Depois disso, parou.</p>
+<table>
+<tr><th>Dia após venda</th><th>Qtd</th><th>%</th><th>Acumulado</th><th>Visual</th></tr>
+<tr><td class="danger">D0 (mesmo dia)</td><td class="danger">267</td><td class="danger">55,2%</td><td>55,2%</td><td><div class="bar bar-red" style="width:55%"></div></td></tr>
+<tr><td>D1</td><td>53</td><td>11,0%</td><td>66,1%</td><td><div class="bar bar-orange" style="width:11%"></div></td></tr>
+<tr><td>D2</td><td>23</td><td>4,8%</td><td class="warn">70,9%</td><td><div class="bar bar-orange" style="width:5%"></div></td></tr>
+<tr><td>D3</td><td>17</td><td>3,5%</td><td>74,4%</td><td><div class="bar bar-orange" style="width:4%"></div></td></tr>
+<tr><td>D4</td><td>5</td><td>1,0%</td><td>75,4%</td><td><div class="bar bar-gray" style="width:1%"></div></td></tr>
+<tr><td style="color:#656d76">D5 (dia do transbordo)</td><td>10</td><td>2,1%</td><td>77,5%</td><td><div class="bar bar-gray" style="width:2%"></div></td></tr>
+<tr><td>D6-7</td><td>22</td><td>4,5%</td><td>82,0%</td><td><div class="bar bar-blue" style="width:5%"></div></td></tr>
+<tr><td>D8-14</td><td>46</td><td>9,5%</td><td>91,5%</td><td><div class="bar bar-blue" style="width:10%"></div></td></tr>
+<tr><td>D15-30</td><td>34</td><td>7,0%</td><td>98,6%</td><td><div class="bar bar-blue" style="width:7%"></div></td></tr>
+<tr><td>D30+</td><td>7</td><td>1,4%</td><td>100%</td><td><div class="bar bar-gray" style="width:1%"></div></td></tr>
+</table>
+
+<div class="pct-bar" style="margin-top:12px;height:36px">
+<div style="width:55.2%;background:#cf222e" title="D0: 55.2%">D0 — 55%</div>
+<div style="width:11%;background:#e5534b" title="D1: 11%">D1</div>
+<div style="width:8.3%;background:#bf8700" title="D2-3: 8.3%">D2-3</div>
+<div style="width:3.1%;background:#d4a72c" title="D4-5: 3.1%">D4-5</div>
+<div style="width:22.4%;background:#0550ae" title="D6+: 22.4%">D6+ (pós-transbordo)</div>
+</div>
+<div style="font-size:12px;color:#656d76;margin-top:4px;display:flex;gap:16px">
+<span><span style="color:#cf222e">■</span> D0 (mesmo dia)</span>
+<span><span style="color:#e5534b">■</span> D1</span>
+<span><span style="color:#bf8700">■</span> D2-3</span>
+<span><span style="color:#d4a72c">■</span> D4-5</span>
+<span><span style="color:#0550ae">■</span> D6+ (pós-transbordo)</span>
+</div>
+</div>
+
+<div class="card" style="margin-top:16px">
+<h3>Velocidade de Setup por Etapa — Não Ativados vs Ativados</h3>
+<p style="font-size:13px;color:#656d76;margin-bottom:8px">% que completa cada setup no D0 (mesmo dia da compra).</p>
+<table>
+<tr><th>Setup</th><th>Não Ativados — % no D0</th><th>Ativados — % no D0</th><th>Diferença</th></tr>
+<tr><td>Login</td><td>93%</td><td>94%</td><td style="color:#656d76">≈ igual</td></tr>
+<tr><td>Pagamento Online</td><td>76%</td><td>72%</td><td style="color:#656d76">≈ igual</td></tr>
+<tr><td>Pagamento Offline</td><td>79%</td><td>73%</td><td style="color:#656d76">≈ igual</td></tr>
+<tr><td>Horário</td><td>80%</td><td>75%</td><td style="color:#656d76">≈ igual</td></tr>
+<tr><td>Cardápio 10+ itens</td><td class="highlight">73%</td><td>60%</td><td class="success">+13pp (não ativ. é mais rápido!)</td></tr>
+<tr><td>Área de Entrega</td><td>72%</td><td>66%</td><td style="color:#656d76">+6pp</td></tr>
+<tr><td>Robô</td><td>61%</td><td>53%</td><td style="color:#656d76">+8pp</td></tr>
+<tr><td>Tempo de Entrega</td><td>62%</td><td>60%</td><td style="color:#656d76">≈ igual</td></tr>
+<tr><td>Valor Mínimo</td><td>60%</td><td>58%</td><td style="color:#656d76">≈ igual</td></tr>
+</table>
+
+<div class="insight-box warning">
+<strong>Paradoxo: os não-ativados configuram TÃO RÁPIDO quanto (ou mais que) os ativados no D0.</strong> A diferença não está na velocidade do setup — ambos fazem o que conseguem no primeiro impulso. A diferença é que os ativados <strong>continuam configurando nos dias seguintes</strong> (D1, D2, D3...) enquanto os não-ativados <strong>param no D0 e nunca mais voltam</strong>.
+</div>
+</div>
+
+<div class="card" style="margin-top:16px">
+<h3>Pararam de Configurar Antes do Transbordo?</h3>
+<table>
+<tr><th>Grupo</th><th>Parou antes do D5</th><th>Continuou após D5</th></tr>
+<tr><td class="danger">Não Ativados (497)</td><td class="danger">349 (70,2%)</td><td>135 (27,2%)</td></tr>
+<tr><td>Ativados (331)</td><td>226 (68,3%)</td><td>105 (31,7%)</td></tr>
+</table>
+
+<div class="insight-box">
+<strong>70% dos não-ativados já tinham parado de configurar quando o transbordo aconteceu.</strong> Ou seja, o HC recebe um parceiro que já está inativo há dias. Mas 68% dos ativados TAMBÉM pararam antes — a diferença é que, quando o HC entra, os ativados retomam e os não-ativados não.
+</div>
+</div>
+
+<div class="summary-box" style="margin-top:16px">
+<h3>Resposta: Fazem setup rápido e ficam esperando?</h3>
+<p><strong style="color:#cf222e">Sim, exatamente.</strong> O padrão é claro:</p>
+<p style="margin:8px 0 0 16px">
+→ <strong>55% fazem tudo que conseguem no D0</strong> (mesmo dia da compra) e param<br>
+→ <strong>70,9% já pararam até o D2</strong> — 3 dias antes do transbordo chegar<br>
+→ Setup mínimo completo em mediana <strong>D0</strong> (64% terminam no mesmo dia)<br>
+→ Quando o HC chega no D5, o parceiro já está <strong>3-5 dias parado</strong><br>
+→ O "esfriamento" não é gradual — é <strong>abrupto</strong>. O parceiro faz um sprint no D0 e depois desaparece
+</p>
+<p style="margin-top:12px"><strong>Implicação direta:</strong> o represamento de 5 dias está atrasando o contato para parceiros que já pararam no D0. Um transbordo no D1 ou D2 (quando o parceiro acabou de parar) teria muito mais chance de reengajá-lo do que esperar até o D5.</p>
+</div>
+</section>
+
+<!-- ==================== RECICLAGEM ==================== -->
+<section id="reciclagem">
+<h2>7. Reciclagem — 169 Parceiros Pausados</h2>
+
+<div class="insight-box warning">
+<strong>Reciclagem = parceiros que não responderam os contatos e não ativaram.</strong> São pausados e entram em modo de recuperação por até 30 dias. 98% são de origem Self (considerando null = Self). Essa é a "última chance" antes do churn.
+</div>
+
+<div class="grid grid-4" style="margin-top:16px">
+<div class="card metric">
+<div class="value">169</div>
+<div class="label">Em Reciclagem</div>
+<div class="sub">Dupla Atuação</div>
+</div>
+<div class="card metric">
+<div class="value" style="color:#0550ae">108</div>
+<div class="label">Setup Mínimo OK</div>
+<div class="sub">63,9%</div>
+</div>
+<div class="card metric">
+<div class="value" style="color:#9a6700">41</div>
+<div class="label">Setup Total OK</div>
+<div class="sub">24,3% (mín + perf)</div>
+</div>
+<div class="card metric">
+<div class="value" style="color:#cf222e">39</div>
+<div class="label">Falta SÓ Pedidos</div>
+<div class="sub">23,1%</div>
+</div>
+</div>
+
+<div class="card" style="margin-top:16px">
+<h3>Categorização: Onde Cada Reciclado Está Travado</h3>
+<table>
+<tr><th>Situação</th><th>Qtd</th><th>%</th><th>O que falta</th></tr>
+<tr><td>Setup mínimo ok, falta setup performance</td><td class="warn">67</td><td class="warn">39,6%</td><td>Precisa completar setups de delivery/salão (robô, área entrega, mesa, garçom, etc.)</td></tr>
+<tr><td>Setup mínimo incompleto</td><td class="danger">61</td><td class="danger">36,1%</td><td>Nem completou o básico (pagamento, horário ou cardápio)</td></tr>
+<tr><td class="highlight">Setup completo — falta SÓ pedidos</td><td class="highlight">39</td><td class="highlight">23,1%</td><td>Tudo pronto, só precisa fazer os 5 pedidos para ativar</td></tr>
+<tr><td style="color:#656d76">Setup completo + tem pedidos</td><td>2</td><td>1,2%</td><td>Possível inconsistência de dados</td></tr>
+</table>
+
+<div class="pct-bar" style="margin-top:12px;height:32px">
+<div style="width:36.1%;background:#cf222e" title="Setup mín incompleto: 36.1%">Mín incompleto 36%</div>
+<div style="width:39.6%;background:#bf8700" title="Falta setup perf: 39.6%">Falta perf 40%</div>
+<div style="width:23.1%;background:#0550ae" title="Falta só pedidos: 23.1%">Só pedidos 23%</div>
+<div style="width:1.2%;background:#afb8c1" title="Outros: 1.2%"></div>
+</div>
+
+<div class="insight-box" style="margin-top:12px">
+<strong>39 parceiros (23,1%) estão com setup completo e só precisam de pedidos.</strong> Esses são os "quick wins" mais claros: uma ação direcionada ("vamos fazer seu primeiro pedido juntos") poderia reativá-los. Outros 67 (39,6%) já passaram do mínimo mas faltam setups de performance — precisam de ajuda técnica específica.
+</div>
+</div>
+
+<div class="card" style="margin-top:16px">
+<h3>Pedidos dos Reciclados</h3>
+<table>
+<tr><th>Indicador</th><th>Qtd</th><th>%</th><th>Insight</th></tr>
+<tr><td>Tem pelo menos 1 pedido</td><td>74</td><td class="warn">43,8%</td><td>Quase metade já fez algum pedido — tiveram um início</td></tr>
+<tr><td>Sem nenhum pedido</td><td class="danger">95</td><td class="danger">56,2%</td><td>Maioria nunca fez sequer 1 pedido</td></tr>
+<tr><td>Tem 5pdd delivery</td><td>13</td><td>7,7%</td><td>Pouquíssimos atingiram a meta delivery</td></tr>
+<tr><td>Tem 5pdd salão</td><td>12</td><td>7,1%</td><td>Idem para salão</td></tr>
+</table>
+</div>
+
+<div class="card" style="margin-top:16px">
+<h3>Detalhamento por Tag Multiproduto</h3>
+<table>
+<tr><th>Tag</th><th>Total</th><th>Setup Mín OK</th><th>Setup Perf OK</th><th>Falta Só Pdd</th><th>Tem 1pdd</th></tr>
+<tr>
+<td>Híbrido</td><td>86</td>
+<td>56 (65,1%)</td>
+<td class="danger">6 (7,0%)</td>
+<td>5 (5,8%)</td>
+<td>37 (43,0%)</td>
+</tr>
+<tr>
+<td>Delivery</td><td>68</td>
+<td>44 (64,7%)</td>
+<td class="highlight">43 (63,2%)</td>
+<td class="highlight">32 (47,1%)</td>
+<td>28 (41,2%)</td>
+</tr>
+<tr>
+<td>Salão</td><td>15</td>
+<td>8 (53,3%)</td>
+<td>2 (13,3%)</td>
+<td>2 (13,3%)</td>
+<td>9 (60,0%)</td>
+</tr>
+</table>
+
+<div class="insight-box" style="margin-top:12px">
+<strong>Delivery é o quick win mais claro:</strong> 32 dos 68 reciclados delivery (47,1%) têm setup completo e faltam só os pedidos. <strong>Híbrido é o mais travado:</strong> apenas 7% completaram o setup performance — o gargalo é setup de salão (grupo salão só 8,1% completaram), o que puxa todo o híbrido para baixo.
+</div>
+</div>
+
+<div class="card" style="margin-top:16px">
+<h3>Gargalo do Híbrido: Setup Salão</h3>
+<p style="font-size:13px;color:#656d76;margin-bottom:8px">Dos 86 reciclados híbridos, os setups de delivery estão razoáveis (~65-72%), mas o setup de salão trava tudo:</p>
+<table>
+<tr><th>Setup</th><th>Delivery Perf</th><th>%</th><th>Salão Perf</th><th>%</th></tr>
+<tr><td>Área Entrega / Grupo Salão</td><td>62</td><td>72,1%</td><td class="danger">7</td><td class="danger">8,1%</td></tr>
+<tr><td>Robô / Tipo Atendimento</td><td>54</td><td>62,8%</td><td>60</td><td>69,8%</td></tr>
+<tr><td>Tempo Entrega / Tipo Operação</td><td>62</td><td>72,1%</td><td>59</td><td>68,6%</td></tr>
+<tr><td>Valor Mínimo</td><td>57</td><td>66,3%</td><td>—</td><td>—</td></tr>
+</table>
+<div class="insight-box critical">
+<strong>Apenas 8,1% dos híbridos completaram o Setup Grupo Salão</strong> (cadastro de mesa/garçom/comanda). Esse é o item que trava 93% dos reciclados híbridos. É um setup mais complexo que exige orientação presencial ou guiada — e sem o HC desde o início, o parceiro simplesmente não faz.
+</div>
+</div>
+</section>
+
+<!-- ==================== CONTATO POR ORIGEM ==================== -->
+<section id="contato">
+<h2>8. Dificuldade de Contato por Origem de Venda <span style="font-size:12px;color:#656d76;font-weight:400">(null = Self)</span></h2>
+
+<div class="insight-box warning">
+<strong>Hipótese do time: "Parceiros de origem Self têm mais dificuldade de contato."</strong> Vamos validar com dados das conversas do Vende AI, cruzando com a coluna sale_responsible_team.
+</div>
+
+<div class="card" style="margin-top:16px">
+<h3>Metodologia do PROCV</h3>
+<p style="font-size:13px;color:#656d76;margin-bottom:12px">Cruzamos deal_id do Vende AI com a base principal. Classificamos a origem de venda pela coluna <code>sale_responsible_team</code>: "Coord. Self" + null = <strong>Self</strong> | Executivos nomeados = <strong>Comercial</strong>.</p>
+<table>
+<tr><th>Origem</th><th>Deals no Vende AI</th><th>% do Total Matched</th></tr>
+<tr><td><span class="tag tag-self">Self (Coord. Self + null)</span></td><td>461</td><td>60,7%</td></tr>
+<tr><td><span class="tag tag-com">Comercial (Executivos)</span></td><td>298</td><td>39,3%</td></tr>
+<tr style="border-top:2px solid #d1d9e0"><td><strong>Total matched</strong></td><td><strong>759</strong></td><td>—</td></tr>
+<tr><td style="color:#656d76">Não matched (fora de abril)</td><td>326</td><td>—</td></tr>
+</table>
+<p style="font-size:12px;color:#656d76;margin-top:8px">Nota: Todos os 759 deals matched são classificados como "100% comercial" no Tipo de Ativação. O Vende AI NÃO registra conversas de "100% Self" nem "Dupla Atuação" — gap crítico de visibilidade.</p>
+</div>
+
+<div class="card" style="margin-top:16px">
+<h3>Comparativo: Self vs Comercial nas Conversas</h3>
+<table>
+<tr>
+<th>Indicador</th>
+<th><span class="tag tag-self">Self (173)</span></th>
+<th><span class="tag tag-com">Comercial (152)</span></th>
+<th>Δ</th>
+<th>Interpretação</th>
+</tr>
+<tr>
+<td>Média msgs/deal</td>
+<td>10,9</td>
+<td class="highlight">19,2</td>
+<td class="danger">-8,3</td>
+<td>Self tem conversas 43% mais curtas</td>
+</tr>
+<tr>
+<td>Média texto/deal</td>
+<td>8,0</td>
+<td class="highlight">12,9</td>
+<td class="danger">-4,9</td>
+<td>Menos trocas de texto</td>
+</tr>
+<tr>
+<td>Média áudio/deal</td>
+<td>2,1</td>
+<td class="highlight">4,2</td>
+<td class="danger">-2,1</td>
+<td>HC envia metade dos áudios</td>
+</tr>
+<tr>
+<td>% conversas curtas (&lt;5 msgs)</td>
+<td class="danger">44,5%</td>
+<td>33,6%</td>
+<td class="danger">+10,9pp</td>
+<td>Quase metade dos Self não engajam</td>
+</tr>
+<tr>
+<td>% conversas mono (≤2 txt)</td>
+<td>26,0%</td>
+<td>24,3%</td>
+<td style="color:#656d76">+1,7pp</td>
+<td>Similar — HC fala sozinho nos dois</td>
+</tr>
+<tr>
+<td>% dificuldade de contato</td>
+<td>8,1%</td>
+<td>9,2%</td>
+<td style="color:#656d76">-1,1pp</td>
+<td>Semelhante — keywords não diferem</td>
+</tr>
+<tr>
+<td>% engajamento positivo</td>
+<td class="highlight">50,3%</td>
+<td class="highlight">56,6%</td>
+<td class="warn">-6,3pp</td>
+<td>Self engaja menos, mas não drasticamente</td>
+</tr>
+<tr>
+<td>% high audio (&gt;5 áudios)</td>
+<td>12,1%</td>
+<td class="warn">23,7%</td>
+<td class="success">-11,6pp</td>
+<td>HC investe MAIS em comercial (mais áudios longos)</td>
+</tr>
+<tr>
+<td>% menção cancelamento</td>
+<td class="danger">9,2%</td>
+<td>4,6%</td>
+<td class="danger">+4,6pp</td>
+<td>Self menciona cancelamento 2x mais</td>
+</tr>
+</table>
+</div>
+
+<div class="card" style="margin-top:16px">
+<h3>Distribuição de Profundidade das Conversas</h3>
+<table>
+<tr><th>Faixa</th><th>Self</th><th>%</th><th>Comercial</th><th>%</th></tr>
+<tr><td>1-2 msgs</td><td class="danger">47</td><td class="danger">27,2%</td><td>39</td><td>25,7%</td></tr>
+<tr><td>3-5 msgs</td><td>42</td><td>24,3%</td><td>16</td><td>10,5%</td></tr>
+<tr><td>6-10 msgs</td><td>26</td><td>15,0%</td><td>16</td><td>10,5%</td></tr>
+<tr><td>11-20 msgs</td><td>29</td><td>16,8%</td><td>30</td><td>19,7%</td></tr>
+<tr><td>21-50 msgs</td><td>24</td><td>13,9%</td><td class="highlight">35</td><td class="highlight">23,0%</td></tr>
+<tr><td>50+ msgs</td><td>5</td><td>2,9%</td><td>16</td><td class="highlight">10,5%</td></tr>
+</table>
+
+<div style="margin-top:16px">
+<h4 style="font-size:14px;color:#1f2328;margin-bottom:8px">Self — 51,4% das conversas têm ≤5 mensagens</h4>
+<div class="pct-bar">
+<div style="width:27.2%;background:#cf222e" title="1-2: 27.2%">1-2</div>
+<div style="width:24.3%;background:#bf8700" title="3-5: 24.3%">3-5</div>
+<div style="width:15%;background:#0550ae" title="6-10: 15%">6-10</div>
+<div style="width:16.8%;background:#368cf9" title="11-20: 16.8%">11-20</div>
+<div style="width:13.9%;background:#1a7f37" title="21-50: 13.9%">21-50</div>
+<div style="width:2.9%;background:#2da44e" title="50+: 2.9%">50+</div>
+</div>
+
+<h4 style="font-size:14px;color:#1f2328;margin:12px 0 8px">Comercial — 33,5% das conversas têm 21+ mensagens</h4>
+<div class="pct-bar">
+<div style="width:25.7%;background:#cf222e" title="1-2: 25.7%">1-2</div>
+<div style="width:10.5%;background:#bf8700" title="3-5: 10.5%">3-5</div>
+<div style="width:10.5%;background:#0550ae" title="6-10: 10.5%">6-10</div>
+<div style="width:19.7%;background:#368cf9" title="11-20: 19.7%">11-20</div>
+<div style="width:23%;background:#1a7f37" title="21-50: 23%">21-50</div>
+<div style="width:10.5%;background:#2da44e" title="50+: 10.5%">50+</div>
+</div>
+</div>
+</div>
+
+<div class="card" style="margin-top:16px">
+<h3>Uso de Áudio — Proxy de Esforço do HC</h3>
+<table>
+<tr><th>Faixa</th><th>Self</th><th>%</th><th>Comercial</th><th>%</th></tr>
+<tr><td>Sem áudio</td><td>94</td><td class="warn">54,3%</td><td>69</td><td>45,4%</td></tr>
+<tr><td>1-3 áudios</td><td>47</td><td>27,2%</td><td>34</td><td>22,4%</td></tr>
+<tr><td>4-10 áudios</td><td>24</td><td>13,9%</td><td>31</td><td>20,4%</td></tr>
+<tr><td>11+ áudios</td><td>8</td><td>4,6%</td><td class="highlight">18</td><td class="highlight">11,8%</td></tr>
+</table>
+<div class="insight-box">
+<strong>54% dos deals Self não recebem nenhum áudio.</strong> No comercial, o HC investe 2,5x mais em áudios pesados (11+). Isso sugere que o HC prioriza parceiros de venda comercial — investindo mais tempo e esforço em quem já foi "aquecido" por um executivo.
+</div>
+</div>
+
+<div class="card" style="margin-top:16px">
+<h3>Primeira Mensagem — Onboarding por Origem</h3>
+<table>
+<tr><th>Tipo de Abertura</th><th>Self</th><th>%</th><th>Comercial</th><th>%</th></tr>
+<tr><td>Outros (genérica/indefinida)</td><td>89</td><td>51,4%</td><td>85</td><td>55,9%</td></tr>
+<tr><td>Saudação simples</td><td>30</td><td>17,3%</td><td>19</td><td>12,5%</td></tr>
+<tr><td>Saudação casual</td><td>23</td><td>13,3%</td><td>14</td><td>9,2%</td></tr>
+<tr><td>Oferta de ajuda</td><td>14</td><td>8,1%</td><td>13</td><td>8,6%</td></tr>
+<tr><td>Sem texto (só áudio/imagem)</td><td>8</td><td>4,6%</td><td>16</td><td>10,5%</td></tr>
+<tr><td>Parabéns</td><td>4</td><td>2,3%</td><td>2</td><td>1,3%</td></tr>
+<tr><td>Boas-vindas</td><td>4</td><td>2,3%</td><td>1</td><td>0,7%</td></tr>
+</table>
+<div class="insight-box critical">
+<strong>Problema sistêmico — independente da origem:</strong> mais de 50% das primeiras mensagens são genéricas, sem pitch estruturado, sem "parabéns pela compra", sem contextualização. Apenas 2-3% começam com parabéns/boas-vindas. E 10,5% dos comerciais começam SEM TEXTO (só enviam áudio na primeira interação — pode não ser ouvido).
+</div>
+</div>
+
+<div class="summary-box" style="margin-top:16px">
+<h3>Veredicto: Self Tem Mais Dificuldade de Contato?</h3>
+<p><strong style="color:#9a6700">PARCIALMENTE VERDADE, MAS NÃO PELO MOTIVO ESPERADO.</strong></p>
+<p>A dificuldade explícita de contato (keywords como "não responde", "sem retorno") é praticamente <strong>igual</strong> entre Self (8,1%) e Comercial (9,2%). O parceiro Self não é mais "difícil de achar".</p>
+<p>O que muda é o <strong>padrão de engajamento</strong>:</p>
+<p style="margin-left:16px">→ Self tem conversas 43% mais curtas (10,9 vs 19,2 msgs)<br>
+→ Self tem 44,5% de conversas com menos de 5 mensagens (vs 33,6%)<br>
+→ Self menciona cancelamento 2x mais (9,2% vs 4,6%)<br>
+→ HC investe menos áudio em Self (54% sem áudio vs 45%)</p>
+<p><strong>Tradução:</strong> o parceiro Self não "some" — ele simplesmente <strong>engaja menos</strong> porque (1) não tem vínculo prévio com um executivo, (2) comprou sozinho e pode ter expectativa diferente de suporte, e (3) o HC parece tratar Self com menos prioridade (menos áudios, conversas mais curtas).</p>
+</div>
+</section>
+
+<!-- ==================== CONVERSAS ==================== -->
+<section id="conversas">
+<h2>9. Análise de Conversas — Temas e Dores</h2>
+
+<div class="insight-box critical" style="margin-bottom:16px">
+<strong>IMPORTANTE — Limitação dos dados:</strong> O Vende AI <strong>NÃO contém conversas de Dupla Atuação nem de 100% Self</strong>. Todos os 759 deals matched são classificados como <strong>"100% Comercial"</strong>. A análise abaixo é um recorte exclusivo de parceiros em fluxo 100% comercial, separados por origem de venda (Coord. Self vs Executivos). Os dados servem como proxy para entender padrões de contato, mas <strong>não representam diretamente a experiência do parceiro dupla atuação</strong>.
+</div>
+
+<div class="card">
+<h3>Temas Mencionados por Origem de Venda <span style="font-size:11px;color:#656d76;font-weight:400">(recorte: 100% Comercial)</span></h3>
+<table>
+<tr><th>Tema</th><th>Self</th><th>%</th><th>Comercial</th><th>%</th><th>Δ</th></tr>
+<tr>
+<td>Pedidos</td>
+<td>71</td><td>41,0%</td>
+<td>73</td><td class="highlight">48,0%</td>
+<td style="color:#656d76">-7,0pp</td>
+</tr>
+<tr>
+<td>Setup técnico</td>
+<td>64</td><td>37,0%</td>
+<td>84</td><td class="highlight">55,3%</td>
+<td class="danger">-18,3pp</td>
+</tr>
+<tr>
+<td>Cardápio</td>
+<td>52</td><td>30,1%</td>
+<td>54</td><td>35,5%</td>
+<td style="color:#656d76">-5,4pp</td>
+</tr>
+<tr>
+<td>Robô/Delivery</td>
+<td>51</td><td>29,5%</td>
+<td>60</td><td class="highlight">39,5%</td>
+<td class="warn">-10,0pp</td>
+</tr>
+<tr>
+<td>Login/App</td>
+<td>46</td><td>26,6%</td>
+<td>66</td><td class="highlight">43,4%</td>
+<td class="danger">-16,8pp</td>
+</tr>
+<tr>
+<td>Pagamento</td>
+<td class="warn">34</td><td class="warn">19,7%</td>
+<td>20</td><td>13,2%</td>
+<td class="warn">+6,5pp</td>
+</tr>
+<tr>
+<td>Salão</td>
+<td>26</td><td>15,0%</td>
+<td>26</td><td>17,1%</td>
+<td style="color:#656d76">-2,1pp</td>
+</tr>
+<tr>
+<td>Cancelamento</td>
+<td class="danger">21</td><td class="danger">12,1%</td>
+<td>10</td><td>6,6%</td>
+<td class="danger">+5,5pp</td>
+</tr>
+</table>
+</div>
+
+<div class="grid grid-2" style="margin-top:16px">
+<div class="card card-accent">
+<h3>Dores Mais Presentes no Self</h3>
+<p style="font-size:14px"><strong style="color:#9a6700">Pagamento (+6,5pp)</strong> — Self tem mais menções de pagamento. Pode ser confusão com plano/assinatura que não existiu na interação com executivo.</p>
+<p style="font-size:14px;margin-top:8px"><strong style="color:#cf222e">Cancelamento (+5,5pp)</strong> — Self menciona cancelamento 2x mais. Perfil que desiste mais rápido — provavelmente por frustração com o produto vs expectativa.</p>
+</div>
+<div class="card card-success">
+<h3>Dores Mais Presentes no Comercial</h3>
+<p style="font-size:14px"><strong style="color:#0550ae">Setup técnico (+18,3pp)</strong> — Comercial fala MUITO mais de configuração. O HC guia ativamente. No Self, o parceiro não chega a esse nível de detalhe.</p>
+<p style="font-size:14px;margin-top:8px"><strong style="color:#0550ae">Login (+16,8pp)</strong> — Comercial resolve login no onboarding. Self pode ter resolvido sozinho antes, ou simplesmente não pergunta.</p>
+<p style="font-size:14px;margin-top:8px"><strong style="color:#0550ae">Robô/Delivery (+10pp)</strong> — HC de comercial configura o robô junto com o parceiro.</p>
+</div>
+</div>
+
+<div class="insight-box" style="margin-top:16px">
+<strong>Insight crítico:</strong> O comercial discute mais temas técnicos porque o HC conduz a conversa ativamente — vai guiando setup, login, robô. No Self, o parceiro não traz esses temas porque <strong>a conversa nem chega lá</strong>. O Self "curto-circuita" antes: conversas curtas, pouco engajamento, e quando fala, fala de pagamento ou cancelamento.
+</div>
+
+<div class="card" style="margin-top:16px">
+<h3>Oportunidades de Pitch de Onboarding</h3>
+
+<div class="insight-box critical">
+<strong>O onboarding é genérico e inconsistente para TODAS as origens.</strong> Apenas 2-3% das conversas começam com "parabéns". Mais de 50% abrem com mensagens sem estrutura. Não existe um playbook de primeira mensagem.
+</div>
+
+<h4 style="margin:16px 0 8px;font-size:14px">Recomendações para o pitch de onboarding:</h4>
+<table>
+<tr><th>#</th><th>Ação</th><th>Detalhe</th><th>Impacto Esperado</th></tr>
+<tr>
+<td>1</td>
+<td><strong>Padronizar primeira mensagem</strong></td>
+<td>Template com: parabéns + resumo do que contratou (delivery/salão/híbrido) + próximos passos claros + CTA de ação imediata</td>
+<td>Alto — define expectativa desde o primeiro contato</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>Diferenciar por origem</strong></td>
+<td>Self: pitch mais educacional ("o que é o Anota AI, o que ele faz por você"). Comercial: pitch de continuidade ("o executivo X me passou seu caso")</td>
+<td>Alto — Self precisa ser "re-vendido"</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>Priorizar texto antes de áudio</strong></td>
+<td>10,5% dos comerciais abrem com áudio. Texto é lido; áudio pode ser ignorado</td>
+<td>Médio — garante que a mensagem chega</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>Incluir checklist visual</strong></td>
+<td>Enviar imagem com checklist de setups restantes no primeiro contato</td>
+<td>Alto — parceiro visualiza o caminho</td>
+</tr>
+<tr>
+<td>5</td>
+<td><strong>Criar urgência saudável</strong></td>
+<td>"Nos primeiros 5 dias seus pedidos contam dobrado para ativação" (se aplicável)</td>
+<td>Médio — incentiva ação rápida</td>
+</tr>
+</table>
+</div>
+</section>
+
+<!-- ==================== CHURN ==================== -->
+<section id="churn">
+<h2>10. Churn — Motivos Mapeados pelo Time + Levantada de Mão</h2>
+
+<div class="grid grid-4">
+<div class="card metric">
+<div class="value" style="color:#cf222e">83</div>
+<div class="label">Churns na Base Principal</div>
+<div class="sub">Dupla Atuação (step_name = Churn)</div>
+</div>
+<div class="card metric">
+<div class="value" style="color:#0550ae">81</div>
+<div class="label">Matched na Base Ativação</div>
+<div class="sub">PROCV por deal_id (97,6%)</div>
+</div>
+<div class="card metric">
+<div class="value" style="color:#9a6700">3</div>
+<div class="label">Na Levantada de Mão</div>
+<div class="sub">Dupla Atuação matched</div>
+</div>
+<div class="card metric">
+<div class="value">519</div>
+<div class="label">Total Base Ativação Churn</div>
+<div class="sub">Todos os tipos (referência)</div>
+</div>
+</div>
+
+<!-- MOTIVOS MAPEADOS PELO TIME -->
+<div class="card" style="margin-top:16px">
+<h3>Motivos de Churn — Mapeados pelo Time de Ativação (81 matches)</h3>
+<p style="font-size:13px;color:#656d76;margin-bottom:12px">PROCV por deal_id entre os 83 churns dupla atuação e a base do time de ativação (519 registros em etapa Churn). Match de 81/83 (97,6%).</p>
+
+<h4 style="font-size:14px;margin:16px 0 8px">Motivo Macro</h4>
+<table>
+<tr><th>Motivo Macro</th><th>Dupla Atuação</th><th>% Dupla</th><th>Base Geral (519)</th><th>% Geral</th><th>Δ</th></tr>
+<tr><td class="danger">Contato</td><td class="danger">12</td><td class="danger">14,8%</td><td>27</td><td>5,2%</td><td class="danger">+9,6pp (3x mais)</td></tr>
+<tr><td>Outros</td><td>14</td><td>17,3%</td><td>155</td><td>29,9%</td><td style="color:#656d76">-12,6pp</td></tr>
+<tr><td>Produto / Preço</td><td>4</td><td>4,9%</td><td>71</td><td>13,7%</td><td style="color:#656d76">-8,8pp</td></tr>
+<tr><td>Comercial</td><td>4</td><td>4,9%</td><td>25</td><td>4,8%</td><td style="color:#656d76">+0,1pp</td></tr>
+<tr><td style="color:#656d76">Sem preenchimento</td><td>47</td><td class="warn">58,0%</td><td>241</td><td>46,4%</td><td class="warn">+11,6pp</td></tr>
+</table>
+
+<div class="insight-box critical" style="margin-top:12px">
+<strong>Dupla atuação tem 3x mais churn por "Contato" (14,8% vs 5,2%).</strong> O parceiro não churna por não gostar do produto — churna porque ninguém conseguiu falar com ele. E 58% dos churns nem têm motivo macro preenchido, contra 46% na base geral — mais silenciosos, menos visibilidade.
+</div>
+</div>
+
+<div class="card" style="margin-top:16px">
+<h3>Submotivos Detalhados — Dupla Atuação (81 churns)</h3>
+<table>
+<tr><th>Submotivo</th><th>Categoria</th><th>Qtd</th><th>% dos 81</th></tr>
+<tr><td class="warn">Não Informou o Motivo</td><td>Outros</td><td class="warn">19</td><td class="warn">23,5%</td></tr>
+<tr><td class="danger">Não retornou os contatos dentro dos dias de tentativa</td><td>Contato</td><td class="danger">9</td><td class="danger">11,1%</td></tr>
+<tr><td class="danger">Cliente nunca retornou os contatos</td><td>Contato</td><td class="danger">5</td><td class="danger">6,2%</td></tr>
+<tr><td>Bad Fit</td><td>Comercial</td><td>3</td><td>3,7%</td></tr>
+<tr><td class="warn">Cliente não quer ser atendido</td><td>Contato</td><td class="warn">3</td><td class="warn">3,7%</td></tr>
+<tr><td>Cliente posterga utilização / Sem previsão de início</td><td>Outros</td><td>2</td><td>2,5%</td></tr>
+<tr><td>Fechará o restaurante</td><td>Outros</td><td>2</td><td>2,5%</td></tr>
+<tr><td>Cadastro Duplicado</td><td>Outros</td><td>2</td><td>2,5%</td></tr>
+<tr><td>Alinhamento Vendas / Quebra de expectativas</td><td>Comercial</td><td>1</td><td>1,2%</td></tr>
+<tr><td>Venda Desalinhada</td><td>Comercial</td><td>1</td><td>1,2%</td></tr>
+<tr><td>Cliente Inadimplente</td><td>Produto/Preço</td><td>1</td><td>1,2%</td></tr>
+<tr><td>Problemas com Pix</td><td>Produto/Preço</td><td>1</td><td>1,2%</td></tr>
+<tr><td>Não gostou do sistema / robô</td><td>Produto/Preço</td><td>1</td><td>1,2%</td></tr>
+<tr><td>Problemas com alguma funcionalidade</td><td>Produto/Preço</td><td>1</td><td>1,2%</td></tr>
+<tr><td style="color:#656d76">Sem submotivo preenchido</td><td>—</td><td>30</td><td>37,0%</td></tr>
+</table>
+</div>
+
+<div class="card" style="margin-top:16px">
+<h3>Comparativo: O que NÃO aparece na Dupla Atuação (vs Base Geral)</h3>
+<table>
+<tr><th>Submotivo</th><th>Dupla Atuação</th><th>Base Geral (519)</th><th>Insight</th></tr>
+<tr><td class="highlight">Baixa Demanda</td><td class="success">0 (0%)</td><td>53 (10,2%)</td><td>Parceiro dupla NÃO churna por falta de cliente — churna por falta de contato</td></tr>
+<tr><td>Não gostou do sistema / robô</td><td>1 (1,2%)</td><td>32 (6,2%)</td><td>Nem chega a usar o sistema direito</td></tr>
+<tr><td>Baixa Maturidade Tecnológica</td><td>0 (0%)</td><td>11 (2,1%)</td><td>Não é problema de perfil técnico</td></tr>
+<tr><td>Falta de Funcionalidades</td><td>0 (0%)</td><td>10 (1,9%)</td><td>Não chega a explorar funcionalidades</td></tr>
+</table>
+<div class="insight-box positive">
+<strong>Os motivos que mais aparecem na base geral (Baixa Demanda, Não gostou do robô, Baixa Maturidade) praticamente NÃO existem na dupla atuação.</strong> Isso reforça que o parceiro dupla não tem problema com o produto — ele tem problema com o <strong>processo</strong>. Se o contato acontecesse antes do esfriamento, muitos desses churns poderiam ser evitados.
+</div>
+</div>
+
+<div class="card" style="margin-top:16px">
+<h3>Consolidado: Motivos Reais vs Invisíveis</h3>
+<div class="pct-bar" style="height:36px">
+<div style="width:21%;background:#cf222e" title="Contato: 17 (21%)">Contato 21%</div>
+<div style="width:9%;background:#bf8700" title="Comercial/Produto: 8 (10%)">Com+Prod 10%</div>
+<div style="width:7.4%;background:#0550ae" title="Outros reais: 6 (7.4%)">Outros 7%</div>
+<div style="width:23.5%;background:#6639ba" title="Não Informou: 19 (23.5%)">Não Informou 24%</div>
+<div style="width:37%;background:#afb8c1" title="Sem preenchimento: 30 (37%)">Sem preencher 37%</div>
+</div>
+<div style="display:flex;gap:16px;font-size:11px;color:#656d76;margin-top:6px;flex-wrap:wrap">
+<span><span style="color:#cf222e">■</span> Contato (nunca retornou / não quer atendimento)</span>
+<span><span style="color:#bf8700">■</span> Comercial + Produto/Preço</span>
+<span><span style="color:#0550ae">■</span> Outros motivos reais</span>
+<span><span style="color:#6639ba">■</span> Não informou o motivo</span>
+<span><span style="color:#afb8c1">■</span> Sem preenchimento</span>
+</div>
+<div class="insight-box warning" style="margin-top:12px">
+<strong>61% dos churns dupla atuação são invisíveis</strong> (24% "Não Informou" + 37% sem preenchimento). Dos 39% com motivo identificável, o maior bloco é <strong>Contato (21%)</strong> — parceiro que nunca retornou ou não quis ser atendido. O churn na dupla atuação é fundamentalmente um problema de <strong>alcançabilidade pós-esfriamento</strong>, não de produto.
+</div>
+</div>
+
+<!-- LEVANTADA DE MÃO -->
+<div class="card" style="margin-top:16px">
+<h3>Churn Levantada de Mão — Visão Complementar</h3>
+<p style="font-size:13px;color:#656d76;margin-bottom:12px">A base de levantada de mão captura cancelamentos formais solicitados pelo parceiro. PROCV por deal_id/merchant_id com a base de abril.</p>
+<table>
+<tr><th>Grupo</th><th>Na Base Abril</th><th>Na Levantada de Mão</th><th>Motivos</th></tr>
+<tr><td><span class="tag tag-dupla">Dupla Atuação</span></td><td>828</td><td class="warn">3 (0,4%)</td><td>"Não me adaptei" (2), "Sem acompanhamento" (1), "Falta funcionalidades" (1)</td></tr>
+<tr><td><span class="tag tag-com">100% Comercial</span></td><td>1.493</td><td>22 (1,5%)</td><td>—</td></tr>
+<tr><td><span class="tag tag-self">100% Self</span></td><td>223</td><td>0</td><td>—</td></tr>
+<tr><td style="color:#656d76">Não matched (fora de abril)</td><td>—</td><td>282</td><td>—</td></tr>
+</table>
+<div class="insight-box">
+Apenas 3 dos 83 churns dupla atuação aparecem na levantada de mão (3,6%). Os motivos dos poucos que formalizaram confirmam o mesmo padrão: <strong>"não me adaptei"</strong> e <strong>"não tive acompanhamento"</strong> — expectativa frustrada + abandono durante o represamento.
+</div>
+</div>
+</section>
+
+<!-- ==================== POR QUÊ ==================== -->
+<section id="porque">
+<h2>11. Por Quê? — Explicação Estruturada</h2>
+
+<div class="summary-box">
+<h3>Por que a Dupla Atuação tem menor ativação e retenção?</h3>
+
+<div style="margin:16px 0">
+<h4 style="color:#cf222e;font-size:15px">Causa 1: Efeito "Esfriamento" do Represamento</h4>
+<p style="margin:8px 0">O parceiro compra motivado (self), mas fica 5 dias sem contato humano. Nesse período, a motivação cai. Quando finalmente é transbordado para o HC, já está desmotivado. É como comprar uma academia e começar a treinar só 1 semana depois — a chance de desistir aumenta.</p>
+</div>
+
+<div style="margin:16px 0">
+<h4 style="color:#cf222e;font-size:15px">Causa 2: Ruptura de Expectativa</h4>
+<p style="margin:8px 0">O parceiro escolheu "seguir sozinho" — ele queria autonomia. Quando falha e é direcionado para um HC, há uma ruptura: ele não pediu ajuda, a ajuda chegou porque ele "fracassou". Isso gera resistência. 44,5% das conversas com parceiros Self têm menos de 5 mensagens — o parceiro simplesmente não engaja com o HC.</p>
+</div>
+
+<div style="margin:16px 0">
+<h4 style="color:#cf222e;font-size:15px">Causa 3: HC Recebe Parceiro sem Contexto</h4>
+<p style="margin:8px 0">No fluxo "100% comercial", o HC sabe exatamente onde o parceiro está (veio de um executivo, tag definida, expectativa alinhada). Na dupla atuação, o HC recebe um parceiro que já tentou e falhou — mas não sabe o que ele tentou, onde travou, nem qual era sua motivação original. O onboarding recomeça do zero.</p>
+</div>
+
+<div style="margin:16px 0">
+<h4 style="color:#cf222e;font-size:15px">Causa 4: Gargalo é Pedidos, não Setup</h4>
+<p style="margin:8px 0">64,4% dos não-ativados já completaram o setup mínimo. Estão travados em fazer os 5 pedidos. O represamento consumiu os primeiros dias em que o restaurante poderia ter feito seus primeiros pedidos com apoio do HC. Quando o HC chega, já perdeu a janela de "novo entusiasmo".</p>
+</div>
+
+<div style="margin:16px 0">
+<h4 style="color:#cf222e;font-size:15px">Causa 5: Score de Lead Irrelevante Pós-Represamento</h4>
+<p style="margin:8px 0">P0 (melhor lead) ativa MENOS que P3 na dupla atuação (36,5% vs 43,6%). Isso comprova que o represamento "neutraliza" a vantagem de ser um bom lead. A qualidade do lead importa na venda, mas perde relevância quando o parceiro esfria durante o represamento.</p>
+</div>
+
+<div style="margin:16px 0">
+<h4 style="color:#cf222e;font-size:15px">Causa 6: Churn Silencioso</h4>
+<p style="margin:8px 0">96,4% dos churns dupla atuação são silenciosos — sem pedido formal de cancelamento. O parceiro simplesmente para. Na levantada de mão, os 3 que formalizaram disseram: "não me adaptei" e "não tive acompanhamento". Se os que formalizam já dizem isso, os silenciosos provavelmente sentem o mesmo com mais intensidade.</p>
+</div>
+</div>
+</section>
+
+<!-- ==================== AÇÕES ==================== -->
+<section id="acoes">
+<h2>12. Recomendações e Próximos Passos</h2>
+
+<div class="grid grid-2">
+<div class="card card-danger">
+<h3 style="color:#cf222e">Ação Imediata — Alto Impacto</h3>
+<table>
+<tr><th>#</th><th>Ação</th></tr>
+<tr><td>1</td><td><strong>Testar represamento de 3 dias (ao invés de 5)</strong> — reduzir janela de esfriamento. Se o teste de 7d já existe, comparar 3d vs 5d vs 7d.</td></tr>
+<tr><td>2</td><td><strong>Passar contexto ao HC no transbordo</strong> — quando transbordar, incluir: quais setups já fez, onde travou, há quantos dias comprou, tag multiproduto. HC não pode começar do zero.</td></tr>
+<tr><td>3</td><td><strong>Padronizar pitch de onboarding por origem</strong> — criar template diferenciado para Self (mais educacional) vs Comercial (continuidade). Hoje 50%+ são genéricos.</td></tr>
+<tr><td>4</td><td><strong>Priorizar parceiros com setup mínimo completo</strong> — 64,4% dos não-ativados só precisam de pedidos. Disparar ação focada em "fazer seu primeiro pedido" para quem já tem setup pronto.</td></tr>
+</table>
+</div>
+
+<div class="card card-warn">
+<h3 style="color:#9a6700">Ação Médio Prazo — Estrutural</h3>
+<table>
+<tr><th>#</th><th>Ação</th></tr>
+<tr><td>5</td><td><strong>Registrar conversas de dupla atuação no Vende AI</strong> — ZERO conversas dupla atuação encontradas. Gap total de visibilidade. Sem dados, sem melhoria.</td></tr>
+<tr><td>6</td><td><strong>Criar segmentação "Self que travou"</strong> — durante o represamento, identificar quem está travando (0 setups feitos em 48h) e transbordar mais cedo, em vez de esperar 5 dias.</td></tr>
+<tr><td>7</td><td><strong>Diferenciar esforço HC por origem</strong> — dados mostram que HC investe menos em Self (menos áudios, conversas mais curtas). Alinhar que Self transbordado precisa de MAIS atenção, não menos.</td></tr>
+<tr><td>8</td><td><strong>Criar fluxo de "re-venda" para dupla atuação</strong> — parceiro precisa ser re-convencido do valor. Primeiro contato do HC deve funcionar como mini-venda, não como suporte técnico.</td></tr>
+</table>
+</div>
+</div>
+
+<div class="card" style="margin-top:16px">
+<h3>Gaps de Dados Identificados</h3>
+<table>
+<tr><th>Gap</th><th>Impacto</th><th>Ação</th></tr>
+<tr><td class="danger">Vende AI não tem conversas de dupla atuação</td><td>Impossível analisar dores específicas desse grupo</td><td>Garantir que deal_id no transbordo persiste no Vende AI</td></tr>
+<tr><td class="warn">Levantada de mão captura apenas 3,6% dos churns</td><td>96% dos churns são invisíveis</td><td>Criar pesquisa automática para quem chega em step Churn</td></tr>
+<tr><td>Coluna sale_responsible_team com 505 nulls</td><td>20% da base sem classificação de origem</td><td>Preencher retroativamente ou definir regra de classificação</td></tr>
+</table>
+</div>
+</section>
+
+<!-- ==================== RESUMO EXECUTIVO ==================== -->
+<section id="resumo" style="margin-top:32px">
+<div class="summary-box" style="border:2px solid #0550ae">
+<h3 style="font-size:18px">Resumo Executivo</h3>
+
+<p><strong>1 em cada 3 projetos (32,5%) é Dupla Atuação</strong> e esse grupo tem as piores métricas: 40% de ativação (vs 54% comercial), 14% em 5pdd delivery (vs 22%), e 34,8% de retenção (vs 37,2%).</p>
+
+<p style="margin-top:12px"><strong>O problema não é qualidade do lead</strong> — P0 ativa menos que P3 nesse grupo. Também <strong>não é setup</strong> — 64% já completaram o mínimo. O gargalo são <strong>pedidos</strong>, e a raiz é o <strong>esfriamento</strong> durante os 5 dias de represamento.</p>
+
+<p style="margin-top:12px"><strong>Sobre dificuldade de contato por origem:</strong> a dificuldade explícita é semelhante (8% Self vs 9% Comercial), mas Self engaja muito menos — 44,5% das conversas têm menos de 5 mensagens, o HC investe menos áudio (54% sem áudio), e Self menciona cancelamento 2x mais. O parceiro Self não é mais difícil de encontrar — ele é mais difícil de <strong>engajar</strong> porque não tem vínculo prévio e o onboarding não é adaptado para quem comprou sozinho.</p>
+
+<p style="margin-top:12px"><strong>Maior alavanca:</strong> (1) Reduzir tempo de represamento, (2) Passar contexto ao HC, (3) Padronizar pitch por origem, (4) Focar em pedidos para quem já tem setup pronto.</p>
+
+<p style="margin-top:12px"><strong>Gap crítico de dados:</strong> ZERO conversas de dupla atuação no Vende AI e 96% dos churns são silenciosos. Sem visibilidade, sem melhoria.</p>
+</div>
+</section>
+
+<footer style="text-align:center;padding:32px 0;color:#afb8c1;font-size:12px">
+Gerado em 20/05/2026 | Dados: Base Abril 2026 | Análise por Claude para Kevilyn Berato
+</footer>
+
+</div>
+</body>
+</html>
